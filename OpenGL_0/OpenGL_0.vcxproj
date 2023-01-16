@@ -138,18 +138,22 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RenderSystem\IndexBuffer.cpp" />
     <ClCompile Include="src\RenderSystem\Renderer.cpp" />
+    <ClCompile Include="src\RenderSystem\VertexArray.cpp" />
     <ClCompile Include="src\RenderSystem\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\shaders\Basic.shader" />
+    <None Include="Questions.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\RenderSystem\IndexBuffer.h" />
     <ClInclude Include="src\RenderSystem\Renderer.h" />
+    <ClInclude Include="src\RenderSystem\VertexArray.h" />
     <ClInclude Include="src\RenderSystem\VertexBuffer.h" />
+    <ClInclude Include="src\RenderSystem\VertexBufferLayout.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="src\RenderSystem\TODO.txt" />
+    <Text Include="TODO.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

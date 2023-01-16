@@ -9,6 +9,7 @@
 #include "RenderSystem/Renderer.h"
 #include "RenderSystem/VertexBuffer.h"
 #include "RenderSystem/IndexBuffer.h"
+#include "RenderSystem/VertexArray.h"
 
 #define BUGGER 1
 
@@ -146,45 +147,48 @@ int main(void)
         };
 
         unsigned int vao;
-        glGenVertexArrays(1, &vao);
-        glBindVertexArray(vao);
+        GLCall(glGenVertexArrays(1, &vao));
+        GLCall(glBindVertexArray(vao));
 
+        VertexArray va;
         VertexBuffer vb(vertices, 2 * 4 * sizeof(float));
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+        VertexBufferLayout layout;
+        layout.Push<float>(2);
+        va.AddBuffer(vb, layout);
 
         IndexBuffer ib(indices, 6);
 
         ShaderProgramSource source = parseShader("resource/shaders/Basic.shader");
         unsigned int shader = createShader(source.VertexShaderSource, source.FragmentShaderSource);
+        GLCall(glUseProgram(shader));
 
         int location = glGetUniformLocation(shader, "u_Color");
-        glUniform4f(location, 0.2f, 0.2f, 0.9f, 1.0f);
+        GLCall(glUniform4f(location, 0.2f, 0.2f, 0.9f, 1.0f));
 
-        glBindVertexArray(0);
-        glUseProgram(0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        GLCall(glBindVertexArray(0));
+        GLCall(glUseProgram(0));
+        GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+        GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
             /* Render here */
-            glClear(GL_COLOR_BUFFER_BIT);
+            GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
-            glUseProgram(shader);
-            glUniform4f(location, 0.2f, 0.2f, 0.9f, 1.0f);
+            GLCall(glUseProgram(shader));
+            GLCall(glUniform4f(location, 0.2f, 0.2f, 0.9f, 1.0f));
 
-            glBindVertexArray(vao);
+            va.Bind();
             ib.Bind();
 
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);  // nullptr because the index buffer is already bound
+            GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));  // nullptr because the index buffer is already bound
 
             /* Swap front and back buffers */
-            glfwSwapBuffers(window);
+            GLCall(glfwSwapBuffers(window));
 
             /* Poll for and process events */
-            glfwPollEvents();
+            GLCall(glfwPollEvents());
         }
     }
     glfwTerminate();

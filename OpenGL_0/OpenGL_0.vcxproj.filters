@@ -27,9 +27,13 @@
     <ClCompile Include="src\RenderSystem\IndexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\RenderSystem\VertexArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\shaders\Basic.shader" />
+    <None Include="Questions.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\RenderSystem\Renderer.h">
@@ -41,8 +45,14 @@
     <ClInclude Include="src\RenderSystem\IndexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\RenderSystem\VertexArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystem\VertexBufferLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="src\RenderSystem\TODO.txt" />
+    <Text Include="TODO.md" />
   </ItemGroup>
 </Project>
