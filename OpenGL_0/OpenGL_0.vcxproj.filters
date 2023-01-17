@@ -30,6 +30,9 @@
     <ClCompile Include="src\RenderSystem\VertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\RenderSystem\ShaderSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\shaders\Basic.shader" />
@@ -49,6 +52,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\RenderSystem\VertexBufferLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystem\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystem\ShaderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
