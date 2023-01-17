@@ -33,8 +33,9 @@ MainGui::~MainGui()
 
 void MainGui::Gui_RegisterTests()
 {
-    testMenu->RegisterTest<test::TestClearColor>("Clear Color");
     currentTest = testMenu;
+    testMenu->RegisterTest<test::TestClearColor>("Clear Color");
+    testMenu->RegisterTest<test::TestTexture2D>("2D Texture");
 }
 
 void MainGui::Gui_NewFrame()
@@ -61,6 +62,7 @@ void MainGui::Gui_Present()
                 currentTest = testMenu;
             }
 
+            // Render the current test's implementation
             currentTest->OnImguiRender();
             ImGui::End();
         }

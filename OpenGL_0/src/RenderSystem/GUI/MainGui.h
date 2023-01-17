@@ -3,6 +3,7 @@
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl3.h>
 #include "Tests/TestClearColor.h"
+#include "Tests/TestTexture2D.h"
 
 class MainGui {
 

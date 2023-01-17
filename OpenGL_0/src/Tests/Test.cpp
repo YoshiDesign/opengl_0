@@ -11,7 +11,7 @@ namespace test {
 	
 	void TestMenu::OnImguiRender() 
 	{
-
+		// Render a button for each registered test
 		for (auto& test : m_Tests)
 		{
 			if (ImGui::Button(test.first.c_str()))
