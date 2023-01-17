@@ -20,7 +20,7 @@ struct VertexBufferElement {
 			case GL_UNSIGNED_INT:   return 4;
 			case GL_UNSIGNED_BYTE:  return 1;
 		}
-		// TODO - ASSERT(false) Throw error of no types match
+		// TODO - ASSERT(false) Throw error if no types match
 		return 0;
 	}
 };

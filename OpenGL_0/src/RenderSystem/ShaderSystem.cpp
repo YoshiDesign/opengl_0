@@ -121,11 +121,28 @@ void ShaderSystem::Unbind() const
 {
     glUseProgram(0);
 }
+
+void ShaderSystem::SetUniform1i(const std::string& name, int val)
+{
+    glUniform1i(GetUniformLocation(name), val);
+}
+
+void ShaderSystem::SetUniform1f(const std::string& name, float val)
+{
+    glUniform1f(GetUniformLocation(name), val);
+}
+
 void ShaderSystem::SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
 {
     glUniform4f(GetUniformLocation(name), v0, v1, v2, v3);
 }
-unsigned int ShaderSystem::GetUniformLocation(const std::string& name)
+
+void ShaderSystem::SetUniformMat4f(const std::string& name, const glm::mat4& mat)
+{
+    glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE , &mat[0][0]);
+}
+
+int ShaderSystem::GetUniformLocation(const std::string& name)
 {
     // Check the cache first
     if (m_UniformLocationCache.find(name) != m_UniformLocationCache.end())
@@ -133,13 +150,14 @@ unsigned int ShaderSystem::GetUniformLocation(const std::string& name)
         return m_UniformLocationCache[name];
     }
 
+    // Find the uniform's target variable within the shader program
     int location = glGetUniformLocation(m_RendererID, name.c_str());
     if (location == -1) 
     {
         std::cout << "Uniform " << name << " doesn't exist.";
     }
     
-    // cache even when location == -1. Technically it's valid
+    // Cache location even when location == -1
     m_UniformLocationCache[name] = location;
     return location;
 }

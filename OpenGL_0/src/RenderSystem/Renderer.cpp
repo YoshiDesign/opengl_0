@@ -15,3 +15,17 @@ bool GLLogCall(const char* function, const char* file, int line)
 	}
 	return true;
 }
+
+void Renderer::Clear() const
+{
+	GLCall(glClear(GL_COLOR_BUFFER_BIT));
+}
+
+void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const ShaderSystem& shader) const
+{
+	shader.Bind();
+	va.Bind();
+	ib.Bind();
+	// TODO - GL_UNSIGNED_INT is a hardcoded way to typeify our data. We could be using unsigned short, for example
+	GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));  // nullptr because the index buffer is already bound
+}
