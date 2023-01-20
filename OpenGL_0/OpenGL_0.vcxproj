@@ -122,7 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>src;src\vendor;C:\dev\OpenGL_0\includes</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game1.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RenderSystem\GUI\MainGui.cpp" />
     <ClCompile Include="src\RenderSystem\IndexBuffer.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="src\vendor\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\vendor\stb\stb_image.cpp" />
+    <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\shaders\Basic.shader" />
@@ -297,6 +299,7 @@
     <None Include="src\vendor\glm\gtx\wrap.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game1.h" />
     <ClInclude Include="src\RenderSystem\GUI\MainGui.h" />
     <ClInclude Include="src\RenderSystem\IndexBuffer.h" />
     <ClInclude Include="src\RenderSystem\Renderer.h" />
@@ -601,6 +604,8 @@
     <ClInclude Include="src\vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="src\vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="src\vendor\stb\stb_image.h" />
+    <ClInclude Include="src\vendor\tiny_obj_loader\tiny_obj_loader.h" />
+    <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.md" />

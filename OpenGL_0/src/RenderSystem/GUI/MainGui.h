@@ -8,9 +8,10 @@
 class MainGui {
 
 public:
-	MainGui(GLFWwindow* window);
+	MainGui();
 	~MainGui();
 
+	void InitImGui(GLFWwindow* window);
 	void Gui_NewFrame();
 	void Gui_Present();
 	void Gui_Render();

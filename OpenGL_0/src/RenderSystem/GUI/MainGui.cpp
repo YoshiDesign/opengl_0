@@ -5,8 +5,9 @@
 #include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
 
-MainGui::MainGui(GLFWwindow* window) 
-    : counter(0), f(0.0f)
+MainGui::MainGui() : counter(0), f(0.0f) {}
+
+void MainGui::InitImGui(GLFWwindow* window)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -16,7 +17,6 @@ MainGui::MainGui(GLFWwindow* window)
     ImGui_ImplOpenGL3_Init((char*)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 
     Gui_RegisterTests();
-
 }
 
 MainGui::~MainGui()
