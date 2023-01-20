@@ -38,8 +38,6 @@ int Window::InitWindow(int w, int h, std::string name)
 
 	glfwMakeContextCurrent(window_device);
 	glfwSwapInterval(1);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 }
 

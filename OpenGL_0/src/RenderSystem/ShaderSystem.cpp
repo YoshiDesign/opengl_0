@@ -65,7 +65,9 @@ ShaderProgramSource ShaderSystem::ParseShader(const std::string& filepath)
     std::string line;
     std::stringstream ss[2];
     ShaderType type = ShaderType::NONE;
-
+    
+    // Since we're compiling shaders from 1 file, we'll look for the beginning of each program
+    // and parse from there.
     while (getline(stream, line))
     {
         if (line.find("#shader") != std::string::npos)

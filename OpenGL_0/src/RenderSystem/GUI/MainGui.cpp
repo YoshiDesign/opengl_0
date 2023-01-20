@@ -47,26 +47,25 @@ void MainGui::Gui_NewFrame()
 
 void MainGui::Gui_Present()
 {
+
+    if (currentTest)
     {
-
-        if (currentTest)
-        {
         
-            currentTest->OnUpdate(0.0f);
-            currentTest->OnRender();
-            ImGui::Begin("Tests!");
+        currentTest->OnUpdate(0.0f);
+        currentTest->OnRender();
+        ImGui::Begin("Tests!");
 
-            if (currentTest != testMenu && ImGui::Button("<-"))
-            {
-                delete currentTest;
-                currentTest = testMenu;
-            }
-
-            // Render the current test's implementation
-            currentTest->OnImguiRender();
-            ImGui::End();
+        if (currentTest != testMenu && ImGui::Button("<-"))
+        {
+            delete currentTest;
+            currentTest = testMenu;
         }
+
+        // Render the current test's implementation
+        currentTest->OnImguiRender();
+        ImGui::End();
     }
+    
 }
 
 void MainGui::Gui_Render()

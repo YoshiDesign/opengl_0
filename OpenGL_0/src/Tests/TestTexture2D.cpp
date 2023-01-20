@@ -24,8 +24,6 @@ namespace test {
 			2,3,0
 		};
 
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		m_VertexArray = std::make_unique<VertexArray>();
 		m_VertexBuffer = std::make_unique<VertexBuffer>(vertices, 4 * 4 * sizeof(float));
 		VertexBufferLayout layout;

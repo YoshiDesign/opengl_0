@@ -31,6 +31,7 @@ public:
 	};
 
 	// Vertex and index information to be sent to the model's vertex and index buffer memory
+	// TODO Observe Builder's destructor if it's a class. Make sure it's being deallocated after createModelFromFile returns
 	struct Builder {
 		std::vector<Vertex> vertices{};
 		std::vector<uint32_t> indices{};

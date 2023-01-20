@@ -136,6 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Game1.cpp" />
+    <ClCompile Include="src\GameSystem\Entity.cpp" />
+    <ClCompile Include="src\GameSystem\Model3D.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RenderSystem\GUI\MainGui.cpp" />
     <ClCompile Include="src\RenderSystem\IndexBuffer.cpp" />
@@ -300,6 +302,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game1.h" />
+    <ClInclude Include="src\GameSystem\Entity.h" />
+    <ClInclude Include="src\GameSystem\Model3D.h" />
     <ClInclude Include="src\RenderSystem\GUI\MainGui.h" />
     <ClInclude Include="src\RenderSystem\IndexBuffer.h" />
     <ClInclude Include="src\RenderSystem\Renderer.h" />

@@ -37,6 +37,9 @@ void Game1::Setup()
         std::runtime_error("Glew is not ok!");
     }
 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_CULL_FACE);
     std::cout << glGetString(GL_VERSION) << std::endl;
 
     gui.InitImGui(window.getGLFWwindow());
@@ -100,8 +103,6 @@ int Game1::run()
 
             gui.Gui_NewFrame();
 
-            shader.Bind();
-
             renderer.Draw(va, ib, shader);
 
             gui.Gui_Present();
@@ -115,14 +116,16 @@ int Game1::run()
         }
 
     }
+    //glDeleteProgram();
+    //glDeleteVertexArrays();
     glfwTerminate();
     return 0;
 }
 
 void Game1::Load3DModels()
 {
-	//auto ship = Entity::createAppObject(THEME_1);
-	//ship.model = AvengModel::createModelFromFile("3D/ship_demo.obj");
-	//ship.transform.translation = { 0.f, 0.f, 0.f };
-	//appObjects.emplace(ship.getId(), std::move(ship));
+	auto ship = AppObject::createAppObject(/*TODO Implement textures*/);
+	ship.model = Model3D::createModelFromFile("resource/3D/ship_demo.obj");
+	ship.transform.translation = { 0.f, 0.f, 0.f };
+	appObjects.emplace(ship.getId(), std::move(ship));
 }
