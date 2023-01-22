@@ -1,8 +1,7 @@
+#include "vcorepch.h"
 #include "TestTexture2D.h"
-
 #include "imgui/imgui.h"
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+
 
 namespace test {
 
@@ -12,7 +11,7 @@ namespace test {
 		m_View(glm::translate(glm::mat4(1.f), glm::vec3(-100.f, 0.f, 0.f)))
 		
 	{
-		float vertices[16] = {
+		/*float vertices[16] = {
 			-50.0f, -50.0f, 0.0f, 0.0f,
 			 50.0f, -50.0f, 1.0f, 0.0f,
 			 50.0f,  50.0f, 1.0f, 1.0f,
@@ -38,7 +37,7 @@ namespace test {
 		m_Shader->SetUniform4f("u_Color", 0.2f, 0.8f, 0.8f, 1.0f);
 
 		m_Texture = std::make_unique<Texture>("resource/textures/textest.png");
-		m_Shader->SetUniform1i("u_Texture", 0);
+		m_Shader->SetUniform1i("u_Texture", 0);*/
 
 	}
 
@@ -53,7 +52,7 @@ namespace test {
 
 	void TestTexture2D::OnRender()
 	{
-		glClearColor(0.f, 0.f, 0.f, 1.f);
+		/*glClearColor(0.f, 0.f, 0.f, 1.f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		m_Texture->Bind();
@@ -74,7 +73,7 @@ namespace test {
 			m_Shader->Bind();
 			m_Shader->SetUniformMat4f("u_MVP", mvp); 
 			renderer.Draw(*m_VertexArray, *m_IndexBuffer, *m_Shader);
-		}
+		}*/
 
 	}
 

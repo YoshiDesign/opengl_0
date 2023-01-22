@@ -7,7 +7,6 @@
 #include "RenderSystem/GUI/MainGui.h"
 #include "Window.h"
 #include "GameSystem/AppObject.h"
-#include "GameSystem/Model3D.h"
 
 class Game1 {
 public:
@@ -25,7 +24,7 @@ private:
 	static constexpr int WIDTH = 640;
 	static constexpr int HEIGHT = 480;
 
-	AppObject::Map appObjects;
+	//AppObject::Map appObjects;
 	Renderer renderer;
 	Window window;
 	MainGui gui;

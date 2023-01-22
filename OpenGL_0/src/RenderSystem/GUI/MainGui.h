@@ -20,7 +20,7 @@ public:
 private:
 	float f;
 	int counter;
-	test::TestClearColor ccTest;
+
 	test::Test* currentTest = nullptr;
 	test::TestMenu* testMenu = new test::TestMenu(currentTest);
 };

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <functional>
 #include "Model3D.h"
+#define TINYOBJLOADER_IMPLEMENTATION
+#include <tiny_obj_loader/tiny_obj_loader.h>
 
 /*
  * Define an operator for the comparison of Vertex objects
@@ -28,7 +30,8 @@ namespace std {
 	};
 }
 
-Model3D::Model3D(std::vector<Model3D::Vertex> vertices, std::vector<uint32_t> indices)
+Model3D::Model3D(std::vector<Model3D::Vertex> _vertices, std::vector<unsigned int> _indices)
+	: vertices(_vertices), indices(_indices)
 {
 
 }

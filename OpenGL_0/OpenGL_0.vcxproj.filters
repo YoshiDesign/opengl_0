@@ -81,10 +81,10 @@
     <ClCompile Include="src\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameSystem\Entity.cpp">
+    <ClCompile Include="src\GameSystem\Model3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameSystem\Model3D.cpp">
+    <ClCompile Include="src\GameSystem\AppObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -499,6 +499,7 @@
     <None Include="src\vendor\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="resource\shaders\Simple_3D.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\RenderSystem\Renderer.h">
@@ -1422,10 +1423,16 @@
     <ClInclude Include="src\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameSystem\Entity.h">
+    <ClInclude Include="src\GameSystem\AppObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\GameSystem\Model3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameSystem\AppComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vcorepch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1434,6 +1441,21 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\textures\textest.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resource\textures\theme1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resource\textures\grid2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resource\textures\theme2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resource\textures\theme3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resource\textures\theme4.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

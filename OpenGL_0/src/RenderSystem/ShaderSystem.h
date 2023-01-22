@@ -1,7 +1,7 @@
 #pragma once
-#include <string>
+#include "vcorepch.h"
 #include <unordered_map>
-#include "glm/glm.hpp"
+#include <string>
 
 struct ShaderProgramSource
 {

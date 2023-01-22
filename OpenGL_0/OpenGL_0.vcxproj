@@ -104,8 +104,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\dev\OpenGL_0\includes</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\dev\OpenGL_0\includes;src;src\vendor</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Game1.cpp" />
-    <ClCompile Include="src\GameSystem\Entity.cpp" />
+    <ClCompile Include="src\GameSystem\AppObject.cpp" />
     <ClCompile Include="src\GameSystem\Model3D.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RenderSystem\GUI\MainGui.cpp" />
@@ -163,6 +163,7 @@
   <ItemGroup>
     <None Include="resource\shaders\Basic.shader" />
     <None Include="Questions.md" />
+    <None Include="resource\shaders\Simple_3D.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />
@@ -302,7 +303,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game1.h" />
-    <ClInclude Include="src\GameSystem\Entity.h" />
+    <ClInclude Include="src\GameSystem\AppComponent.h" />
+    <ClInclude Include="src\GameSystem\AppObject.h" />
     <ClInclude Include="src\GameSystem\Model3D.h" />
     <ClInclude Include="src\RenderSystem\GUI\MainGui.h" />
     <ClInclude Include="src\RenderSystem\IndexBuffer.h" />
@@ -316,6 +318,7 @@
     <ClInclude Include="src\Tests\Test.h" />
     <ClInclude Include="src\Tests\TestClearColor.h" />
     <ClInclude Include="src\Tests\TestTexture2D.h" />
+    <ClInclude Include="src\vcorepch.h" />
     <ClInclude Include="src\vendor\glm\common.hpp" />
     <ClInclude Include="src\vendor\glm\detail\compute_common.hpp" />
     <ClInclude Include="src\vendor\glm\detail\compute_vector_relational.hpp" />
@@ -615,7 +618,12 @@
     <Text Include="TODO.md" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resource\textures\grid2.png" />
     <Image Include="resource\textures\textest.png" />
+    <Image Include="resource\textures\theme1.png" />
+    <Image Include="resource\textures\theme2.png" />
+    <Image Include="resource\textures\theme3.png" />
+    <Image Include="resource\textures\theme4.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
