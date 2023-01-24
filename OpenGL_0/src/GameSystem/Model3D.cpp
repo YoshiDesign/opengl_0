@@ -81,16 +81,16 @@ void Model3D::Builder::loadModel(const std::string& filepath)
 					attrib.vertices[3 * index.vertex_index + 2],
 				};
 
-				vertex.color = {
-					attrib.colors[3 * index.vertex_index + 0],
-					attrib.colors[3 * index.vertex_index + 1],
-					attrib.colors[3 * index.vertex_index + 2],
-				};
 				//vertex.color = {
-				//	1.0f,
-				//	0.0f,
-				//	0.0f,
+				//	attrib.colors[3 * index.vertex_index + 0],
+				//	attrib.colors[3 * index.vertex_index + 1],
+				//	attrib.colors[3 * index.vertex_index + 2],
 				//};
+				vertex.color = {
+					1.0f,
+					0.0f,
+					0.0f,
+				};
 
 			}
 

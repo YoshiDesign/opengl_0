@@ -2,7 +2,7 @@
 
 #include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
-
+#include "GameSystem/KeyboardController.h"
 #include "RenderSystem/Renderer.h"
 #include "RenderSystem/GUI/MainGui.h"
 #include "Window.h"
@@ -19,7 +19,7 @@ public:
 
 	void Setup();
 	int run();
-	void updateCamera(/*float frameTime, */AppObject& viewerObject, Camera& camera);
+	void updateCamera(float frameTime, AppObject& viewerObject, Camera& camera);
 	//void Load3DModels();
 
 private:
@@ -30,6 +30,7 @@ private:
 
 	//AppObject::Map appObjects;
 	AppObject viewerObject{ AppObject::createAppObject() };
+	KeyboardController cameraController{};
 	Camera camera{};
 	Renderer renderer;
 	Window window;

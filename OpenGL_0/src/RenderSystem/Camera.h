@@ -16,6 +16,9 @@ public:
 
 	const glm::mat4& getProjection() const { return projectionMatrix; }
 	const glm::mat4& getView() const { return viewMatrix; }
+	const float* getProjectionv() const { return &projectionMatrix[0][0]; }
+	const float* getViewv() const { return &viewMatrix[0][0]; }
+
 	const glm::vec4 getCameraView();
 
 private:

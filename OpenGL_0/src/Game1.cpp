@@ -11,6 +11,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <chrono>
 
 Game1::Game1()
 {
@@ -50,16 +51,17 @@ int Game1::run()
     {
 
         auto obj = AppObject::createAppObject(/*TODO Implement textures*/);
-        obj.model = Model3D::createModelFromFile("resource/3D/ship_demo.obj");
-        obj.transform.translation.z = -12.5f;
-        obj.transform.rotation.z = glm::radians(180.f);
-        obj.transform.rotation.x = glm::radians(45.f);
-        //obj.transform.scale = { 0.f, 0.f, 0.f };
+        obj.model = Model3D::createModelFromFile("resource/3D/cube.obj");
+        obj.transform.translation.z = -22.5f;
+        obj.transform.rotation.z = glm::radians(32.f);
+        obj.transform.rotation.x = glm::radians(25.f);
+        obj.transform.scale = { 10.f, 10.f, 10.f };
         // appObjects.emplace(obj.getId(), std::move(obj));
-        // 
+        
+
         // Initial camera position
         viewerObject.transform.rotation.y = glm::radians(180.f);
-        updateCamera(viewerObject, camera);
+        // updateCamera(viewerObject, camera);
 
         VertexArray va;
         VertexBuffer vb;
@@ -94,22 +96,32 @@ int Game1::run()
         //vb.Unbind();
         //ib.Unbind();
 
+        auto currentTime = std::chrono::high_resolution_clock::now();
+
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window.getGLFWwindow()))
         {
-            //glfwPollEvents();
+            glfwPollEvents();
 
             /* Render here */
             renderer.Clear();
 
-            //gui.Gui_NewFrame();
+            gui.Gui_NewFrame();
 
-            updateCamera(viewerObject, camera);
+            // Calculate time between iterations
+            auto newTime = std::chrono::high_resolution_clock::now();
+            float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+            currentTime = newTime;
+
+            //frameTime = glm::min(frameTime, MAX_FRAME_TIME);	// Use this to lock to a specific max frame rate
+
+            // Updates the viewer object transform component based on key input, proportional to the time elapsed since the last frame
+            updateCamera(frameTime, viewerObject, camera);
 
             //for (auto& obj : appObjects) {
             renderer.Draw(va, ib, shader);
-            glUniformMatrix4fv(0, 1, GL_FALSE, &projectionMat[0][0]);
-            glUniformMatrix4fv(1, 1, GL_FALSE, &viewMat[0][0]);
+            glUniformMatrix4fv(0, 1, GL_FALSE, camera.getProjectionv());
+            glUniformMatrix4fv(1, 1, GL_FALSE, camera.getViewv());
             glUniformMatrix4fv(2, 1, GL_FALSE, &modelMat[0][0]);
             glEnableVertexAttribArray(0);
             glEnableVertexAttribArray(1);
@@ -119,8 +131,8 @@ int Game1::run()
 
             //}
 
-            //gui.Gui_Present();
-            //gui.Gui_Render();
+            gui.Gui_Present();
+            gui.Gui_Render();
 
             /* Swap front and back buffers */
             GLCall(glfwSwapBuffers(window.getGLFWwindow()));
@@ -136,10 +148,11 @@ int Game1::run()
     return 0;
 }
 
-void Game1::updateCamera(/*float frameTime, */AppObject& viewerObject, Camera& camera)
+void Game1::updateCamera(float frameTime, AppObject& viewerObject, Camera& camera)
 {
-    camera.setViewYXZ(viewerObject.transform.translation + glm::vec3(0.f, 0.f, 0.f), viewerObject.transform.rotation + glm::vec3());
-    camera.setPerspectiveProjection(glm::radians(90.f), aspect, 0.1f, 1000.f);
+    cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, viewerObject);
+    camera.setViewYXZ(viewerObject.transform.translation + glm::vec3(0.f, 0.f, -.80f), viewerObject.transform.rotation + glm::vec3());
+    camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 1000.f);
 }
 
 //void Game1::Load3DModels()

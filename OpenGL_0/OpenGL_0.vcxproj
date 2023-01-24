@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="src\Game1.cpp" />
     <ClCompile Include="src\GameSystem\AppObject.cpp" />
+    <ClCompile Include="src\GameSystem\KeyboardController.cpp" />
     <ClCompile Include="src\GameSystem\Model3D.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RenderSystem\Camera.cpp" />
@@ -306,6 +307,7 @@
     <ClInclude Include="src\Game1.h" />
     <ClInclude Include="src\GameSystem\AppComponent.h" />
     <ClInclude Include="src\GameSystem\AppObject.h" />
+    <ClInclude Include="src\GameSystem\KeyboardController.h" />
     <ClInclude Include="src\GameSystem\Model3D.h" />
     <ClInclude Include="src\RenderSystem\Camera.h" />
     <ClInclude Include="src\RenderSystem\GUI\MainGui.h" />
