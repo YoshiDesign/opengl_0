@@ -35,6 +35,8 @@ void Game1::Setup()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CW);
+    glCullFace(GL_BACK);
     std::cout << glGetString(GL_VERSION) << std::endl;
 
     gui.InitImGui(window.getGLFWwindow());
@@ -49,42 +51,48 @@ int Game1::run()
 
         auto obj = AppObject::createAppObject(/*TODO Implement textures*/);
         obj.model = Model3D::createModelFromFile("resource/3D/ship_demo.obj");
-        obj.transform.translation = { 0.f, 0.f, 0.f };
+        obj.transform.translation.z = -12.5f;
+        obj.transform.rotation.z = glm::radians(180.f);
+        obj.transform.rotation.x = glm::radians(45.f);
+        //obj.transform.scale = { 0.f, 0.f, 0.f };
         // appObjects.emplace(obj.getId(), std::move(obj));
+        // 
+        // Initial camera position
+        viewerObject.transform.rotation.y = glm::radians(180.f);
+        updateCamera(viewerObject, camera);
 
         VertexArray va;
         VertexBuffer vb;
-        vb.UpdateData(obj.model->getVerticesv(), obj.model->getSizeVertices());
+        vb.UpdateData(obj.model->getVerticesv(), obj.model->getNumVertices());
 
         VertexBufferLayout layout;
         layout.PushVertex(sizeof(Model3D::Vertex));
 
-        va.AddBuffer(vb, layout, sizeof(Model3D::Vertex));
+        va.AddBuffer(vb, layout);
 
-        IndexBuffer ib(obj.model->getIndicesv(), obj.model->getSizeIndices());
+        IndexBuffer ib(obj.model->getIndicesv(), obj.model->getNumIndices());
 
-        // World space definition
-        glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-        // The viewing vantage point
-        glm::mat4 view = glm::translate(glm::mat4(1.f), glm::vec3(-100.f, 0.f, 0.f));
-        // Model space
-        glm::mat4 model = glm::translate(glm::mat4(1.f), glm::vec3(200.f, 200.f, 0.0f));
-        // 
-        glm::mat4 mvp = proj * view * model;
+        glm::mat4 projectionMat = camera.getProjection();
+        glm::mat4 viewMat = camera.getView();
+        glm::mat4 modelMat = obj.transform._mat4();
+        //glm::mat4 mvp = proj * view * model;
 
         ShaderSystem shader("resource/shaders/Simple_3D.shader");
-        shader.Bind();
-        shader.SetUniform4f("u_Color", 0.2f, 0.8f, 0.8f, 1.0f);
-        shader.SetUniformMat4f("u_MVP", mvp);
+        //shader.Bind();
+        //shader.SetUniform4f("u_Color", 0.2f, 0.8f, 0.8f, 1.0f);
+        //shader.SetUniformMat4f("u_MVP", mvp);
+        //glUniformMatrix4fv(0, 1, GL_FALSE, &mvp[0][0]);
+        //glEnableVertexAttribArray(0);
+        
 
-        Texture texture("resource/textures/textest.png");
-        texture.Bind();
-        shader.SetUniform1i("u_Texture", 0);
+        //Texture texture("resource/textures/textest.png");
+        //texture.Bind();
+        //shader.SetUniform1i("u_Texture", 0);
 
-        va.Unbind();
-        shader.Unbind();
-        vb.Unbind();
-        ib.Unbind();
+        //va.Unbind();
+        //shader.Unbind();
+        //vb.Unbind();
+        //ib.Unbind();
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window.getGLFWwindow()))
@@ -94,19 +102,25 @@ int Game1::run()
             /* Render here */
             renderer.Clear();
 
-            gui.Gui_NewFrame();
+            //gui.Gui_NewFrame();
 
-            shader.SetUniformMat4f("u_MVP", mvp);
-            //glUniformMatrix4fv(0, 1, GL_FALSE, &mvp[0][0]);
+            updateCamera(viewerObject, camera);
 
             //for (auto& obj : appObjects) {
+            renderer.Draw(va, ib, shader);
+            glUniformMatrix4fv(0, 1, GL_FALSE, &projectionMat[0][0]);
+            glUniformMatrix4fv(1, 1, GL_FALSE, &viewMat[0][0]);
+            glUniformMatrix4fv(2, 1, GL_FALSE, &modelMat[0][0]);
+            glEnableVertexAttribArray(0);
+            glEnableVertexAttribArray(1);
+            glEnableVertexAttribArray(2);
+            //shader.SetUniformMat4f("u_MVP", mvp);
             
-                renderer.Draw(va, ib, shader);
 
             //}
 
-            gui.Gui_Present();
-            gui.Gui_Render();
+            //gui.Gui_Present();
+            //gui.Gui_Render();
 
             /* Swap front and back buffers */
             GLCall(glfwSwapBuffers(window.getGLFWwindow()));
@@ -120,6 +134,12 @@ int Game1::run()
     //glDeleteVertexArrays();
     glfwTerminate();
     return 0;
+}
+
+void Game1::updateCamera(/*float frameTime, */AppObject& viewerObject, Camera& camera)
+{
+    camera.setViewYXZ(viewerObject.transform.translation + glm::vec3(0.f, 0.f, 0.f), viewerObject.transform.rotation + glm::vec3());
+    camera.setPerspectiveProjection(glm::radians(90.f), aspect, 0.1f, 1000.f);
 }
 
 //void Game1::Load3DModels()

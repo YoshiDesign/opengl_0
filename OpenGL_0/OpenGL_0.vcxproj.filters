@@ -87,6 +87,9 @@
     <ClCompile Include="src\GameSystem\AppObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\RenderSystem\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\shaders\Basic.shader" />
@@ -1433,6 +1436,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\vcorepch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystem\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

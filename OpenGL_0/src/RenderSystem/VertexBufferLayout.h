@@ -66,15 +66,16 @@ public:
 	void PushVertex(unsigned int size)
 	{
 		std::cout << "Pushing Vertex descriptor" << std::endl;
+		std::cout << "Size: " << size << std::endl;
 		// This needs to match our Vertex objects members
 		// glm::vec3 position{};	
 		// glm::vec3 color{};		
 		// glm::vec3 normal{};		
 		// glm::vec2 texCoord{};	
-		m_Elements.push_back({ GL_FLOAT, 3, GL_TRUE });
-		m_Elements.push_back({ GL_FLOAT, 3, GL_TRUE });
-		m_Elements.push_back({ GL_FLOAT, 3, GL_TRUE });
-		m_Elements.push_back({ GL_FLOAT, 2, GL_TRUE });
+		m_Elements.push_back({ GL_FLOAT, 3, GL_FALSE });
+		m_Elements.push_back({ GL_FLOAT, 3, GL_FALSE });
+		m_Elements.push_back({ GL_FLOAT, 3, GL_FALSE });
+		m_Elements.push_back({ GL_FLOAT, 2, GL_FALSE });
 		m_Stride += size;
 	}
 

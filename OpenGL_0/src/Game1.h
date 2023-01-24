@@ -7,6 +7,7 @@
 #include "RenderSystem/GUI/MainGui.h"
 #include "Window.h"
 #include "GameSystem/AppObject.h"
+#include "RenderSystem/Camera.h"
 
 class Game1 {
 public:
@@ -18,13 +19,18 @@ public:
 
 	void Setup();
 	int run();
-	void Load3DModels();
+	void updateCamera(/*float frameTime, */AppObject& viewerObject, Camera& camera);
+	//void Load3DModels();
 
 private:
 	static constexpr int WIDTH = 640;
 	static constexpr int HEIGHT = 480;
 
+	float aspect{ WIDTH / HEIGHT };
+
 	//AppObject::Map appObjects;
+	AppObject viewerObject{ AppObject::createAppObject() };
+	Camera camera{};
 	Renderer renderer;
 	Window window;
 	MainGui gui;

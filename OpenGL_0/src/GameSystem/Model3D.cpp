@@ -86,6 +86,11 @@ void Model3D::Builder::loadModel(const std::string& filepath)
 					attrib.colors[3 * index.vertex_index + 1],
 					attrib.colors[3 * index.vertex_index + 2],
 				};
+				//vertex.color = {
+				//	1.0f,
+				//	0.0f,
+				//	0.0f,
+				//};
 
 			}
 

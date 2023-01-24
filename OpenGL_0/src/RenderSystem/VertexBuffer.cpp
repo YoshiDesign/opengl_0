@@ -1,9 +1,10 @@
 #include "VertexBuffer.h"
 #include "Renderer.h"
+#include "GameSystem/Model3D.h"
 VertexBuffer::VertexBuffer(/*const void* data, unsigned int size */)
 {
-    //GLCall(glGenBuffers(1, &m_RendererID));
-    glCreateBuffers(1, &m_RendererID);
+    GLCall(glGenBuffers(1, &m_RendererID));
+    // glCreateBuffers(1, &m_RendererID);
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID));
 }
 
@@ -14,7 +15,8 @@ VertexBuffer::~VertexBuffer()
 
 void VertexBuffer::UpdateData(const void* data, unsigned int size)
 {
-    GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
+    std::cout << "Num Vertices: " << size << std::endl;
+    GLCall(glBufferData(GL_ARRAY_BUFFER, size * sizeof(Model3D::Vertex), data, GL_STATIC_DRAW));
 }
 
 void VertexBuffer::Bind() const

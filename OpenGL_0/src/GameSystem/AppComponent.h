@@ -9,7 +9,7 @@ struct TransformComponent
     glm::vec3 scale = { 1.f, 1.f, 1.f };
     float modPI = 3.14159;
 
-    glm::vec3 deltas = { 0.0f, 0.0f, 0.0f };
+    glm::vec3 delta = { 0.0f, 0.0f, 0.0f };
     glm::vec3 velocity = { 0.0f, 0.0f, 0.0f };
 
     TransformComponent() = default;

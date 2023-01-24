@@ -117,7 +117,7 @@ unsigned int ShaderSystem::CreateShader(const std::string& vertexShader, const s
 
 void ShaderSystem::Bind() const
 {
-    glUseProgram(m_RendererID);
+    GLCall(glUseProgram(m_RendererID));
 }
 
 void ShaderSystem::Unbind() const
@@ -152,7 +152,7 @@ void ShaderSystem::SetUniform4f(const std::string& name, float v0, float v1, flo
 
 void ShaderSystem::SetUniformMat4f(const std::string& name, const glm::mat4& mat)
 {
-    glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE , &mat[0][0]);
+    GLCall(glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE , &mat[0][0]));
 }
 
 int ShaderSystem::GetUniformLocation(const std::string& name)
@@ -168,6 +168,9 @@ int ShaderSystem::GetUniformLocation(const std::string& name)
     if (location == -1) 
     {
         std::cout << "Uniform " << name << " doesn't exist.";
+    }
+    else {
+        std::cout << "Found Uniform: " << name << " at location " << location << std::endl;;
     }
     
     // Cache location even when location == -1

@@ -26,6 +26,6 @@ void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const ShaderSy
 	shader.Bind();
 	va.Bind();
 	ib.Bind();
-	// TODO - GL_UNSIGNED_INT is a hardcoded way to typeify our data. We could be using unsigned short, for example
+	// TODO - GL_UNSIGNED_INT is a hardcoded way to typeify our data. It works for an index with a high upper bound. We could be using unsigned short, for example
 	GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));  // nullptr because the index buffer is already bound
 }

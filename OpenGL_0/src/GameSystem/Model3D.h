@@ -18,7 +18,7 @@ public:
 		glm::vec3 position{};		// Position of the vertex
 		glm::vec3 color{};			// color at this vertex
 		glm::vec3 normal{};			// surface norms
-		alignas(16) glm::vec2 texCoord{};		// 2d texture coordinates
+		glm::vec2 texCoord{};		// 2d texture coordinates
 
 		// This is used with our hashing function to generate keys in our ordered map of vertices
 		bool operator==(const Vertex& other) const
@@ -43,10 +43,10 @@ public:
 	Model3D& operator=(const Model3D&) = delete;
 	~Model3D();
 
-	inline unsigned int getSizeVertices() { return sizeof(Vertex) * vertices.size(); }
-	inline unsigned int getSizeIndices() { return sizeof(unsigned int) * indices.size(); }
-	inline void* getVerticesv() { return &vertices[0]; }
-	inline unsigned int* getIndicesv() { return &indices[0]; }
+	inline unsigned int getNumVertices() { return vertices.size(); }
+	inline unsigned int getNumIndices() { return indices.size(); }
+	inline void* getVerticesv() { return &vertices.front(); }
+	inline unsigned int* getIndicesv() { return &indices.front(); }
 
 	static std::unique_ptr<Model3D> createModelFromFile(const std::string& filepath);
 
@@ -54,6 +54,5 @@ private:
 
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	
 
 };

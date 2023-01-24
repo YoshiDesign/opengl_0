@@ -139,6 +139,7 @@
     <ClCompile Include="src\GameSystem\AppObject.cpp" />
     <ClCompile Include="src\GameSystem\Model3D.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\RenderSystem\Camera.cpp" />
     <ClCompile Include="src\RenderSystem\GUI\MainGui.cpp" />
     <ClCompile Include="src\RenderSystem\IndexBuffer.cpp" />
     <ClCompile Include="src\RenderSystem\Renderer.cpp" />
@@ -306,6 +307,7 @@
     <ClInclude Include="src\GameSystem\AppComponent.h" />
     <ClInclude Include="src\GameSystem\AppObject.h" />
     <ClInclude Include="src\GameSystem\Model3D.h" />
+    <ClInclude Include="src\RenderSystem\Camera.h" />
     <ClInclude Include="src\RenderSystem\GUI\MainGui.h" />
     <ClInclude Include="src\RenderSystem\IndexBuffer.h" />
     <ClInclude Include="src\RenderSystem\Renderer.h" />
