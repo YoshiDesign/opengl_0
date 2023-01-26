@@ -13,7 +13,6 @@ class ShaderSystem {
 
 private:
 
-	int GetUniformLocation(const std::string& name);
 	unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	unsigned int CompileShader(unsigned int type, const std::string& source);
 	ShaderProgramSource ParseShader(const std::string& filepath);
@@ -28,6 +27,9 @@ public:
 
 	void Bind() const;	// We call it Bind even though OpenGL uses the "glUseProgram" convention
 	void Unbind() const;	// Again, just being consistent with our Buffer/Array class methods
+	int GetUniformLocation(const std::string& name);
+
+	inline unsigned int GetID() const { return m_RendererID; };
 
 	// Set uniforms
 	void SetUniform1i(const std::string& name, int val);	// Int Uniform Buffer

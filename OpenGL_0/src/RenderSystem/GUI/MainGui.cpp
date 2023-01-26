@@ -60,7 +60,12 @@ void MainGui::Gui_Present()
             delete currentTest;
             currentTest = testMenu;
         }
-
+        for (auto& db : debug_data) 
+        {
+            ImGui::Text(
+                "%s : %f", db.first, db.second);
+        }
+        
         // Render the current test's implementation
         currentTest->OnImguiRender();
         ImGui::End();

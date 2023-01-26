@@ -146,6 +146,7 @@
     <ClCompile Include="src\RenderSystem\Renderer.cpp" />
     <ClCompile Include="src\RenderSystem\ShaderSystem.cpp" />
     <ClCompile Include="src\RenderSystem\Texture.cpp" />
+    <ClCompile Include="src\RenderSystem\UBO.cpp" />
     <ClCompile Include="src\RenderSystem\VertexArray.cpp" />
     <ClCompile Include="src\RenderSystem\VertexBuffer.cpp" />
     <ClCompile Include="src\Tests\Test.cpp" />
@@ -163,9 +164,10 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\shaders\Basic.shader" />
+    <None Include="resource\shaders\00_Basic.shader" />
     <None Include="Questions.md" />
-    <None Include="resource\shaders\Simple_3D.shader" />
+    <None Include="resource\shaders\02_Block.shader" />
+    <None Include="resource\shaders\01_Simple_3D.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />
@@ -307,15 +309,18 @@
     <ClInclude Include="src\Game1.h" />
     <ClInclude Include="src\GameSystem\AppComponent.h" />
     <ClInclude Include="src\GameSystem\AppObject.h" />
+    <ClInclude Include="src\GameSystem\DebugData.h" />
     <ClInclude Include="src\GameSystem\KeyboardController.h" />
     <ClInclude Include="src\GameSystem\Model3D.h" />
     <ClInclude Include="src\RenderSystem\Camera.h" />
+    <ClInclude Include="src\RenderSystem\FrameContent.h" />
     <ClInclude Include="src\RenderSystem\GUI\MainGui.h" />
     <ClInclude Include="src\RenderSystem\IndexBuffer.h" />
     <ClInclude Include="src\RenderSystem\Renderer.h" />
     <ClInclude Include="src\RenderSystem\Shader.h" />
     <ClInclude Include="src\RenderSystem\ShaderSystem.h" />
     <ClInclude Include="src\RenderSystem\Texture.h" />
+    <ClInclude Include="src\RenderSystem\UBO.h" />
     <ClInclude Include="src\RenderSystem\VertexArray.h" />
     <ClInclude Include="src\RenderSystem\VertexBuffer.h" />
     <ClInclude Include="src\RenderSystem\VertexBufferLayout.h" />

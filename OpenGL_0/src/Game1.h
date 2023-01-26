@@ -28,7 +28,7 @@ private:
 
 	float aspect{ WIDTH / HEIGHT };
 
-	//AppObject::Map appObjects;
+	AppObject::Map appObjects;
 	AppObject viewerObject{ AppObject::createAppObject() };
 	KeyboardController cameraController{};
 	Camera camera{};

@@ -15,7 +15,7 @@ VertexBuffer::~VertexBuffer()
 
 void VertexBuffer::UpdateData(const void* data, unsigned int size)
 {
-    std::cout << "Num Vertices: " << size << std::endl;
+    //std::cout << "Num Vertices: " << size << std::endl;
     GLCall(glBufferData(GL_ARRAY_BUFFER, size * sizeof(Model3D::Vertex), data, GL_STATIC_DRAW));
 }
 

@@ -93,9 +93,12 @@
     <ClCompile Include="src\GameSystem\KeyboardController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\RenderSystem\UBO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\shaders\Basic.shader" />
+    <None Include="resource\shaders\00_Basic.shader" />
     <None Include="Questions.md" />
     <None Include="src\vendor\glm\detail\func_common.inl">
       <Filter>Header Files</Filter>
@@ -505,7 +508,8 @@
     <None Include="src\vendor\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="resource\shaders\Simple_3D.shader" />
+    <None Include="resource\shaders\01_Simple_3D.shader" />
+    <None Include="resource\shaders\02_Block.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\RenderSystem\Renderer.h">
@@ -1445,6 +1449,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\GameSystem\KeyboardController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystem\FrameContent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystem\UBO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameSystem\DebugData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

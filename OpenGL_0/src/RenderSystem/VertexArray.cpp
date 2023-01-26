@@ -13,6 +13,9 @@ VertexArray::~VertexArray()
 	GLCall(glDeleteVertexArrays(1, &m_RendererID));
 }
 
+/**
+ * Buffer of the Vertex Attribute layout
+ */
 void VertexArray::AddBuffer(VertexBuffer& vb, const VertexBufferLayout& layout)
 {
 	// Bind the Vertex Array
