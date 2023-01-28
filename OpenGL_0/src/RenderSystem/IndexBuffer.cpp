@@ -3,8 +3,8 @@
 
 IndexBuffer::IndexBuffer()
 {
+    std::cout << "Gen Index Buffer" << std::endl;
     GLCall(glGenBuffers(1, &m_RendererID));
-    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID));
 }
 
 void IndexBuffer::UpdateData(const unsigned int* data, unsigned int count)
@@ -12,7 +12,7 @@ void IndexBuffer::UpdateData(const unsigned int* data, unsigned int count)
     m_count = count;
     // This could cause incompat on certains platforms if !true
     // ASSERT(sizeof unsigned int == sizeof GLuint)
-    //std::cout << "Num indices: " << count << std::endl;
+    std::cout << "Num indices: " << count << std::endl;
     GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned int), data, GL_STATIC_DRAW));
 }
 

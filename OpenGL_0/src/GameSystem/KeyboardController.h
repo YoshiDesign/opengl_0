@@ -22,7 +22,7 @@ public:
     void moveInPlaneXZ(GLFWwindow* window, float dt, AppObject& appObject);
 
     KeyMappings keys{};
-    float moveSpeed{ 3.f };
+    float moveSpeed{ 13.f };
     float lookSpeed{ 1.5f };
 
 };

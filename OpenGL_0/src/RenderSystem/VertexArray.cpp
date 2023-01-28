@@ -5,6 +5,7 @@
 
 VertexArray::VertexArray()
 {
+	std::cout << "Gen Vertex Array" << std::endl;
 	GLCall(glGenVertexArrays(1, &m_RendererID));
 }
 
@@ -26,20 +27,17 @@ void VertexArray::AddBuffer(VertexBuffer& vb, const VertexBufferLayout& layout)
 	// Describe the memory layout of our incoming VertexBufferElements
 	const auto& elements = layout.getElements();
 	unsigned int offset = 0;
-	std::cout << "Element Count: " << elements.size() << std::endl;
+	//std::cout << "Element Count: " << elements.size() << std::endl;
 	for (unsigned int i = 0; i < elements.size(); i++)
 	{
 		const auto& element = elements[i];
 
-		std::cout << "Count:\t" << element.count <<
-			" Type:\t" << element.type <<
-			" Norm:\t" << element.normalized << std::endl;
 		GLCall(glEnableVertexAttribArray(i));
 		// TODO - Replace glVertexAttribPointer with a less shitty function
 		// See: https://stackoverflow.com/questions/37972229/glvertexattribpointer-and-glvertexattribformat-whats-the-difference
 		GLCall(glVertexAttribPointer(i, element.count, element.type, element.normalized, layout.getStride(), (const void*)offset));
 		offset += element.count * sizeof(GLfloat);
-		std::cout << "Offsetting: " << offset << " bytes." << std::endl;
+
 	}
 }
 

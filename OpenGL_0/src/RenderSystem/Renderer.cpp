@@ -16,10 +16,9 @@ bool GLLogCall(const char* function, const char* file, int line)
 	return true;
 }
 
-
 void Renderer::Clear() const
 {
-	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT););
+	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 }
 
 void Renderer::Draw(VertexArray& va, VertexBuffer& vb, IndexBuffer& ib, const ShaderSystem& shader, FrameContent& frame_content) const
@@ -54,8 +53,11 @@ void Renderer::Draw(VertexArray& va, VertexBuffer& vb, IndexBuffer& ib, const Sh
 
 	//memcpy(frame_content.blockBuffer + frame_content.offset[0], frame_content.camera.getViewv(), sizeof(glm::mat4));
 	//memcpy(frame_content.blockBuffer + frame_content.offset[1], frame_content.camera.getProjectionv(), sizeof(glm::mat4));
-
+	// Add IB
+	
 	for (auto& obj : frame_content.appObjects) {
+
+		std::cout << "obj: " << obj.first << std::endl;
 
 		obj.second.transform.rotation = glm::vec3(1.0) * ((float)glfwGetTime() * glm::radians(20.0f));
 
@@ -65,12 +67,7 @@ void Renderer::Draw(VertexArray& va, VertexBuffer& vb, IndexBuffer& ib, const Sh
 		glBufferData(GL_UNIFORM_BUFFER, frame_content.ubo.getBlockSize(), frame_content.ubo.getBuffer(), GL_DYNAMIC_DRAW);
 		glBindBufferBase(GL_UNIFORM_BUFFER, 0, frame_content.ubo.getID());
 
-		// Add VB
-		// vb.Bind();
-		vb.UpdateData(obj.second.model->getVerticesv(), obj.second.model->getNumVertices());
-
-		// Add IB
-		ib.Bind();
+		vb.UpdateData(obj.second.model->getVerticesv(), obj.second.model->getNumVertices()); // TODO repeatedly calling getNumVertices... like a noob.
         ib.UpdateData(obj.second.model->getIndicesv(), obj.second.model->getNumIndices());
 
 		//frame_content.model_ubo[0] = obj.second.transform._mat4();
@@ -79,7 +76,7 @@ void Renderer::Draw(VertexArray& va, VertexBuffer& vb, IndexBuffer& ib, const Sh
 
 		// Map Uniform Buffer Range for Model Transform
 
-		// TODO - GL_UNSIGNED_INT is a hardcoded way to typeify our data. It works for an index with a high upper bound. We could be using unsigned short, for example
+		// TODO - GL_UNSIGNED_INT is a hardcoded way to typeify our data. It works for an index with a high upper bound. We could be using unsigned short if things remain low-poly.
 		GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));  // nullptr because the index buffer is already bound
 	}
 }

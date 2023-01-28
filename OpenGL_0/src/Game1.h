@@ -20,13 +20,13 @@ public:
 	void Setup();
 	int run();
 	void updateCamera(float frameTime, AppObject& viewerObject, Camera& camera);
-	//void Load3DModels();
+	void Load3DModels();
 
 private:
 	static constexpr int WIDTH = 640;
 	static constexpr int HEIGHT = 480;
 
-	float aspect{ WIDTH / HEIGHT };
+	float aspect{ (float) WIDTH / (float) HEIGHT };
 
 	AppObject::Map appObjects;
 	AppObject viewerObject{ AppObject::createAppObject() };

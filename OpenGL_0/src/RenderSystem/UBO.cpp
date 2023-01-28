@@ -18,8 +18,13 @@ void UBO::Bind()
 	glBindBuffer(GL_UNIFORM_BUFFER, m_UboId);
 }
 
+/*
+ * TODO: Make CreateNamedUniformBlock a static builder that returns a unique ptr to a UBO
+ *       Dynamic name lookups
+ */
 void UBO::CreateNamedUniformBlock(const char* blockName, unsigned int program, unsigned int num)
 {
+    // This uniform block already has memory. Don
     if (blockBuffer) {
         free(blockBuffer);
         throw std::runtime_error("[Error] UBO::CreateUniformBlock - A buffer with this name is already allocated.");
