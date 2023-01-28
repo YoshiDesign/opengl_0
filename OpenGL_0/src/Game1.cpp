@@ -56,13 +56,13 @@ int Game1::run()
     {
 
         auto obj = AppObject::createAppObject(/*TODO Implement textures*/);
-        obj.model = Model3D::createModelFromFile("resource/3D/colored_cube.obj");
+        obj.model = Model3D::createModelFromFile("resource/3D/sphere.obj");
         obj.transform.translation.z = -22.5f;
         obj.transform.scale = { 3.f, 8.f, 3.f };
         appObjects.emplace(obj.getId(), std::move(obj));
 
         auto obj_2 = AppObject::createAppObject(/*TODO Implement textures*/);
-        obj_2.model = Model3D::createModelFromFile("resource/3D/colored_cube.obj");
+        obj_2.model = Model3D::createModelFromFile("resource/3D/sphere.obj");
         obj_2.transform.translation.z = -22.5f;
         obj_2.transform.translation.x = -20.f;
         appObjects.emplace(obj_2.getId(), std::move(obj_2));
@@ -76,22 +76,24 @@ int Game1::run()
         VertexBuffer vb;
         // Gen IB
         IndexBuffer ib;
-        ib.Bind();
 
         // Construct vertex shader attributes
         VertexBufferLayout layout;
         layout.PushVertex(sizeof(Model3D::Vertex));
 
         // Bind and add VA -- Create our vertex attribute locations
-        va.AddBuffer(vb, layout);
+        va.AddBuffer(ib, vb, layout);
 
         //
-        ShaderSystem shader("resource/shaders/01_Simple_3D.shader");
-        shader.Bind();
-        
+        ShaderSystem shaderSystem;
+        shaderSystem.AddShader("resource/shaders/03_Simple_3D.shader", "BlueShader");
+        shaderSystem.AddShader("resource/shaders/01_Simple_3D.shader", "GreenShader");
+
+        shaderSystem.Bind("BlueShader");
+
         //
         UBO ubo;
-        ubo.CreateNamedUniformBlock("Transforms", shader.GetID(), 3);
+        ubo.CreateNamedUniformBlock("Transforms", shaderSystem.GetID("BlueShader"), 3);
 
         //
         FrameContent frame_content = {
@@ -100,9 +102,8 @@ int Game1::run()
           ubo
         };
 
-        //Texture texture("resource/textures/textest.png");
-        //texture.Bind();
-        //shader.SetUniform1i("u_Texture", 0);
+        Texture texture("resource/textures/t1.png");
+        texture.Bind();
 
         auto currentTime = std::chrono::high_resolution_clock::now();
 
@@ -112,8 +113,6 @@ int Game1::run()
         int m_frames = 0;
         float m_tick = 0.0f;
         float fps = 0.0f;
-
-  
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window.getGLFWwindow()))
@@ -146,7 +145,7 @@ int Game1::run()
             // Updates the viewer object transform component based on key input, proportional to the time elapsed since the last frame
             updateCamera(frameTime, viewerObject, camera);
 
-            renderer.Draw(va, vb, ib, shader, frame_content);
+            renderer.Draw(va, vb, ib, shaderSystem, frame_content);
 
             gui.Gui_Present();
             gui.Gui_Render();
@@ -159,8 +158,11 @@ int Game1::run()
         }
 
     }
+
+    // Exiting the anonymous scope will delete from each class destructor
     //glDeleteProgram();
     //glDeleteVertexArrays();
+
     glfwTerminate();
     return 0;
 }
@@ -175,7 +177,7 @@ void Game1::updateCamera(float frameTime, AppObject& viewerObject, Camera& camer
 void Game1::Load3DModels()
 {
 	auto ship = AppObject::createAppObject(/*TODO Implement textures*/);
-	ship.model = Model3D::createModelFromFile("resource/3D/ship_demo.obj");
+	ship.model = Model3D::createModelFromFile("resource/3D/sphere.obj");
 	ship.transform.translation = { 0.f, 0.f, 0.f };
 	appObjects.emplace(ship.getId(), std::move(ship));
 

@@ -168,6 +168,7 @@
     <None Include="Questions.md" />
     <None Include="resource\shaders\02_Block.shader" />
     <None Include="resource\shaders\01_Simple_3D.shader" />
+    <None Include="resource\shaders\03_Simple_3D.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />

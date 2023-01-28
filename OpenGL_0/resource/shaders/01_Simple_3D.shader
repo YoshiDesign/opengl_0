@@ -17,7 +17,7 @@ layout(location = 0) out vec4 f_fragColor;
 void main() {
 	vec4 positionWorld = T.modelMatrix * vec4(position, 1.0);	// Translate this vertex from model space to world space
 	gl_Position = T.projectionMatrix * T.viewMatrix * positionWorld;
-	f_fragColor = vec4(v_fragColor, 1.0);
+	f_fragColor = vec4(position, 1.0);
 }
 
 #shader fragment
@@ -26,5 +26,5 @@ layout(location = 0) in vec4 fragColor;
 layout(location = 0) out vec4 outColor;
 
 void main() {
-	outColor = fragColor;
+	outColor = fragColor * gl_FragCoord;
 }

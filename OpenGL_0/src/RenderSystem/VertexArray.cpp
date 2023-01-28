@@ -17,13 +17,13 @@ VertexArray::~VertexArray()
 /**
  * Buffer of the Vertex Attribute layout
  */
-void VertexArray::AddBuffer(VertexBuffer& vb, const VertexBufferLayout& layout)
+void VertexArray::AddBuffer(IndexBuffer& ib, VertexBuffer& vb, const VertexBufferLayout& layout)
 {
 	// Bind the Vertex Array
 	Bind();
 	// Bind the Vertex Array's Buffer
 	vb.Bind();
-
+	ib.Bind();
 	// Describe the memory layout of our incoming VertexBufferElements
 	const auto& elements = layout.getElements();
 	unsigned int offset = 0;

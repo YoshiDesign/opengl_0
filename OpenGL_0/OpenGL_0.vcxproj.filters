@@ -510,6 +510,7 @@
     </None>
     <None Include="resource\shaders\01_Simple_3D.shader" />
     <None Include="resource\shaders\02_Block.shader" />
+    <None Include="resource\shaders\03_Simple_3D.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\RenderSystem\Renderer.h">

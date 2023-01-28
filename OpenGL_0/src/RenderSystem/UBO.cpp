@@ -36,8 +36,6 @@ void UBO::CreateNamedUniformBlock(const char* blockName, unsigned int program, u
     // Find the size of this uniform block
     GLCall(glGetActiveUniformBlockiv(program, ubo_index, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize));
 
-    std::cout << "Block Size: " << blockSize << std::endl;
-
     // Create our temporary buffer for copying data into our shader's uniform 
     blockBuffer = (unsigned char*)malloc(blockSize);
 
@@ -45,7 +43,6 @@ void UBO::CreateNamedUniformBlock(const char* blockName, unsigned int program, u
     const char* names[] = { "Transforms.viewMatrix", "Transforms.projectionMatrix", "Transforms.modelMatrix" };
     unsigned int indices[3];
     GLCall(glGetUniformIndices(program, num, &names[0], indices));
-    std::cout << "Indices: " << indices[0] << ", " << indices[1] << ", " << indices[2] << std::endl;
 
     /*
    TODO - Validate indices. Make sure they exist - As unsigned ints their value will be MAX_INTEGER. Use std::numeric_limits<int>::max()
