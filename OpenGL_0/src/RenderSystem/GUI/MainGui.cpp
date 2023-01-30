@@ -35,7 +35,7 @@ void MainGui::Gui_RegisterTests()
 {
     currentTest = testMenu;
     testMenu->RegisterTest<test::TestClearColor>("Clear Color");
-    testMenu->RegisterTest<test::TestTexture2D>("2D Texture");
+    //testMenu->RegisterTest<test::TestTexture2D>("2D Texture");
 }
 
 void MainGui::Gui_NewFrame()

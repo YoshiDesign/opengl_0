@@ -37,11 +37,11 @@ void Game1::Setup()
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-    glEnable(GL_CULL_FACE);
-    glFrontFace(GL_CW);
-    glCullFace(GL_BACK);
+    //glEnable(GL_DEPTH_TEST);
+    //glDepthFunc(GL_LEQUAL);
+    //glEnable(GL_CULL_FACE);
+    //glFrontFace(GL_CW);
+    //glCullFace(GL_BACK);
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
@@ -54,18 +54,17 @@ int Game1::run()
 
     // Leaving this scope will clean up stack allocations while a GL Context still exists
     {
+        //for (int i = 0; i < 10; i++) {
+            //for (int j = 0; j < 10; j++) {
 
-        auto obj = AppObject::createAppObject(/*TODO Implement textures*/);
-        obj.model = Model3D::createModelFromFile("resource/3D/sphere.obj");
-        obj.transform.translation.z = -22.5f;
-        obj.transform.scale = { 3.f, 8.f, 3.f };
-        appObjects.emplace(obj.getId(), std::move(obj));
+                auto obj = AppObject::createAppObject(/*TODO Implement textures*/);
+                obj.model = Model3D::createModelFromFile("resource/3D/TheUniverse.obj");
+                //obj.transform.translation.z = 15.0f * i;
+                //obj.transform.scale = { i + j, i + j, i + j };
+                appObjects.emplace(obj.getId(), std::move(obj));
 
-        auto obj_2 = AppObject::createAppObject(/*TODO Implement textures*/);
-        obj_2.model = Model3D::createModelFromFile("resource/3D/sphere.obj");
-        obj_2.transform.translation.z = -22.5f;
-        obj_2.transform.translation.x = -20.f;
-        appObjects.emplace(obj_2.getId(), std::move(obj_2));
+            //}
+        //}
         
         // Initial camera position
         viewerObject.transform.rotation.y = glm::radians(180.f);
@@ -102,7 +101,8 @@ int Game1::run()
           ubo
         };
 
-        //Texture texture("resource/textures/t1.png");
+        Texture texture;
+        texture.Add2DTexture("resource/textures/t1.png");
         //texture.Bind();
 
         auto currentTime = std::chrono::high_resolution_clock::now();
@@ -176,10 +176,10 @@ void Game1::updateCamera(float frameTime, AppObject& viewerObject, Camera& camer
 
 void Game1::Load3DModels()
 {
-	auto ship = AppObject::createAppObject(/*TODO Implement textures*/);
-	ship.model = Model3D::createModelFromFile("resource/3D/sphere.obj");
-	ship.transform.translation = { 0.f, 0.f, 0.f };
-	appObjects.emplace(ship.getId(), std::move(ship));
+	//auto ship = AppObject::createAppObject(/*TODO Implement textures*/);
+	//ship.model = Model3D::createModelFromFile("resource/3D/sphere.obj");
+	//ship.transform.translation = { 0.f, 0.f, 0.f };
+	//appObjects.emplace(ship.getId(), std::move(ship));
 
     //for (int i = 0; i < 10; i++) {
     //    

@@ -1,7 +1,6 @@
-
-#include "Texture.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
+#include "Texture.h"
 
 Texture::Texture()
 	: m_RendererID(0), m_TextureID(nullptr), m_Width(0), m_Height(0), m_BPP(0)
@@ -52,7 +51,6 @@ void Texture::Add2DTexture(const std::string& path)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);	  // Don't extend the texture's area
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);	  // Don't tile the texture
-
 
 	// Describe the memory layout to be allocated on the GPU
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_TextureID);

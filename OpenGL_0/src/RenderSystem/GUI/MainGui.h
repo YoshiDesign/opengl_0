@@ -5,7 +5,7 @@
 #include <unordered_map>
 
 #include "Tests/TestClearColor.h"
-#include "Tests/TestTexture2D.h"
+//#include "Tests/TestTexture2D.h"
 #include "Gamesystem/DebugData.h"
 
 class MainGui {

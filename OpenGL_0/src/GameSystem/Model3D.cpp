@@ -123,6 +123,6 @@ void Model3D::Builder::loadModel(const std::string& filepath)
 		}
 	}
 
-	std::cout << "Vertices: " << vertices.size() << std::endl;
-	std::cout << "Indices: " << indices.size() << std::endl;
+	//std::cout << "Vertices: " << vertices.size() << std::endl;
+	//std::cout << "Indices: " << indices.size() << std::endl;
 }
