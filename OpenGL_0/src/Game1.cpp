@@ -102,8 +102,8 @@ int Game1::run()
           ubo
         };
 
-        Texture texture("resource/textures/t1.png");
-        texture.Bind();
+        //Texture texture("resource/textures/t1.png");
+        //texture.Bind();
 
         auto currentTime = std::chrono::high_resolution_clock::now();
 
