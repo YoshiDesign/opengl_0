@@ -50,6 +50,7 @@ void Renderer::Draw(VertexArray& va, VertexBuffer& vb, IndexBuffer& ib, ShaderSy
 		*((glm::mat4*)(frame_content.ubo.getBuffer() + 128)) = obj.second.transform._mat4();
 
 		glBufferData(GL_UNIFORM_BUFFER, frame_content.ubo.getBlockSize(), frame_content.ubo.getBuffer(), GL_DYNAMIC_DRAW);
+		// TODO - Instead of BindBufferBase, try BindBufferRange
 		glBindBufferBase(GL_UNIFORM_BUFFER, 0, frame_content.ubo.getID());
 
 		vb.UpdateData(obj.second.model->getVerticesv(), obj.second.model->getNumVertices()); // TODO repeatedly calling getNumVertices... like a noob.

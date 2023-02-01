@@ -58,8 +58,8 @@ int Game1::run()
             //for (int j = 0; j < 10; j++) {
 
                 auto obj = AppObject::createAppObject(/*TODO Implement textures*/);
-                obj.model = Model3D::createModelFromFile("resource/3D/TheUniverse.obj");
-                //obj.transform.translation.z = 15.0f * i;
+                obj.model = Model3D::createModelFromFile("resource/3D/sphere.obj");
+                obj.transform.translation.z = -15.0f;
                 //obj.transform.scale = { i + j, i + j, i + j };
                 appObjects.emplace(obj.getId(), std::move(obj));
 
