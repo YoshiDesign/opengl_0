@@ -37,11 +37,11 @@ void Game1::Setup()
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    //glEnable(GL_DEPTH_TEST);
-    //glDepthFunc(GL_LEQUAL);
-    //glEnable(GL_CULL_FACE);
-    //glFrontFace(GL_CW);
-    //glCullFace(GL_BACK);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CW);
+    glCullFace(GL_BACK);
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
@@ -54,17 +54,19 @@ int Game1::run()
 
     // Leaving this scope will clean up stack allocations while a GL Context still exists
     {
-        //for (int i = 0; i < 10; i++) {
-            //for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 10; j++) {
 
                 auto obj = AppObject::createAppObject(/*TODO Implement textures*/);
                 obj.model = Model3D::createModelFromFile("resource/3D/sphere.obj");
                 obj.transform.translation.z = -15.0f;
+                obj.transform.translation.x = -15.0f * j;
+                obj.transform.translation.y =  15.0f * i;
                 //obj.transform.scale = { i + j, i + j, i + j };
                 appObjects.emplace(obj.getId(), std::move(obj));
 
-            //}
-        //}
+            }
+        }
         
         // Initial camera position
         viewerObject.transform.rotation.y = glm::radians(180.f);
@@ -93,6 +95,7 @@ int Game1::run()
         //
         UBO ubo;
         ubo.CreateNamedUniformBlock("Transforms", shaderSystem.GetID("BlueShader"), 3);
+        //ubo.Bind();
 
         //
         FrameContent frame_content = {
@@ -127,7 +130,7 @@ int Game1::run()
             auto newTime = std::chrono::high_resolution_clock::now();
             float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
             currentTime = newTime;
-            gui.debug_data["FrameTime"] = frameTime;
+            //gui.debug_data["FrameTime"] = frameTime;
 
             // Calculating FPS
             m_tick += frameTime;
@@ -135,6 +138,7 @@ int Game1::run()
             if (m_tick >= 1.0f) 
             {
                 gui.debug_data["FPS"] = ImGui::GetIO().Framerate;
+                gui.debug_data["FrameTime"] = frameTime;
                 m_tick = 0.0f;
                 //m_frames = 0;
                 //tick++;
@@ -144,6 +148,7 @@ int Game1::run()
 
             // Updates the viewer object transform component based on key input, proportional to the time elapsed since the last frame
             updateCamera(frameTime, viewerObject, camera);
+
 
             renderer.Draw(va, vb, ib, shaderSystem, frame_content);
 
@@ -162,6 +167,7 @@ int Game1::run()
     // Exiting the anonymous scope will delete from each class destructor
     //glDeleteProgram();
     //glDeleteVertexArrays();
+    glUnmapBuffer(GL_UNIFORM_BUFFER);
 
     glfwTerminate();
     return 0;

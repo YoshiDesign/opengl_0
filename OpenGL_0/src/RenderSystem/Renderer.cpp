@@ -23,43 +23,29 @@ void Renderer::Clear() const
 
 void Renderer::Draw(VertexArray& va, VertexBuffer& vb, IndexBuffer& ib, ShaderSystem& shaderSystem, FrameContent& frame_content) const
 {
-
-	//glNamedBufferData(frame_content.blockBuffer, sizeof(glm::mat4) * 2, NULL, GL_DYNAMIC_COPY);
-	//glm::mat4* pv_transforms = (glm::mat4*) glMapNamedBuffer(frame_content.blockBuffer, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
-	//memcpy(blockBuffer + offset[0], innerColor, 4 * sizeof(GLfloat));
-
-	// Create the Uniform Block in a temporary buffer. Same as memcpy
-	*((glm::mat4*)(frame_content.ubo.getBuffer() + 0)) = frame_content.camera.getView();
-	*((glm::mat4*)(frame_content.ubo.getBuffer() + 64)) = frame_content.camera.getProjection();
-
-	// int i = 0;
+	frame_content.ubo.Bind();
+	glNamedBufferData(frame_content.ubo.getID(), frame_content.ubo.getBlockSize(), NULL, GL_DYNAMIC_DRAW);
+	*((glm::mat4*)(frame_content.ubo.getBuffer() + frame_content.ubo.offsets[0])) = frame_content.camera.getView();
+	*((glm::mat4*)(frame_content.ubo.getBuffer() + frame_content.ubo.offsets[1])) = frame_content.camera.getProjection();
+	/*int x;
+	glGetBufferParameteriv(GL_UNIFORM_BUFFER, GL_BUFFER_USAGE, &x);
+	std::cout << x << std::endl;*/
 	for (auto& obj : frame_content.appObjects) {
-		//i++;
 
-		//if(i & 1)
-		//{
-		//	shaderSystem.Bind("GreenShader");
-		//}
-		//else {
-		//	shaderSystem.Bind("BlueShader");
-		//}
+		void* ptr = glMapNamedBuffer(frame_content.ubo.m_uboId, GL_WRITE_ONLY | GL_MAP_INVALIDATE_BUFFER_BIT);
 
-		obj.second.transform.rotation = glm::vec3(1.0) * ((float)glfwGetTime() * glm::radians(20.0f));
+		*((glm::mat4*)(frame_content.ubo.getBuffer() + frame_content.ubo.offsets[2])) = obj.second.transform._mat4();
+		memcpy(ptr, frame_content.ubo.getBuffer(), frame_content.ubo.getBlockSize());
 
-		//memcpy(frame_content.blockBuffer + frame_content.offset[2], &obj.second.transform._mat4()[0][0], sizeof(glm::mat4));
-		*((glm::mat4*)(frame_content.ubo.getBuffer() + 128)) = obj.second.transform._mat4();
-
-		glBufferData(GL_UNIFORM_BUFFER, frame_content.ubo.getBlockSize(), frame_content.ubo.getBuffer(), GL_DYNAMIC_DRAW);
-		// TODO - Instead of BindBufferBase, try BindBufferRange
+		glUnmapNamedBuffer(frame_content.ubo.getID());
+		
 		glBindBufferBase(GL_UNIFORM_BUFFER, 0, frame_content.ubo.getID());
 
 		vb.UpdateData(obj.second.model->getVerticesv(), obj.second.model->getNumVertices()); // TODO repeatedly calling getNumVertices... like a noob.
-        ib.UpdateData(obj.second.model->getIndicesv(), obj.second.model->getNumIndices());
+		ib.UpdateData(obj.second.model->getIndicesv(), obj.second.model->getNumIndices());
 
-		//glm::mat4* m_transforms = (glm::mat4*)glMapBufferRange(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4) * 2, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
-		//m_transforms = &frame_content.model_ubo[0];
-
-		// TODO - GL_UNSIGNED_INT is a hardcoded way to typeify our data. It works for an index with a high upper bound. We could be using unsigned short if things remain low-poly.
 		GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));  // nullptr because the index buffer is already bound
 	}
+
+	
 }

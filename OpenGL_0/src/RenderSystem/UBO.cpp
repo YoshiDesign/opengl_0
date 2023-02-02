@@ -3,7 +3,7 @@
 
 UBO::UBO()
 {
-	glGenBuffers(1, &m_UboId);
+	glGenBuffers(1, &m_uboId);
 }
 
 UBO::~UBO()
@@ -15,7 +15,7 @@ UBO::~UBO()
 
 void UBO::Bind()
 {
-	glBindBuffer(GL_UNIFORM_BUFFER, m_UboId);
+	glBindBuffer(GL_UNIFORM_BUFFER, m_uboId);
 }
 
 /*
@@ -41,7 +41,7 @@ void UBO::CreateNamedUniformBlock(const char* blockName, unsigned int program, u
 
     // Look up the indices within the uniform block
     const char* names[] = { "Transforms.viewMatrix", "Transforms.projectionMatrix", "Transforms.modelMatrix" };
-    unsigned int indices[3];
+    
     GLCall(glGetUniformIndices(program, num, &names[0], indices));
 
     /*
@@ -49,10 +49,15 @@ void UBO::CreateNamedUniformBlock(const char* blockName, unsigned int program, u
     */
 
     // Find the byte offsets of our uniform block
-    int offset[3];
-    GLCall(glGetActiveUniformsiv(program, num, indices, GL_UNIFORM_OFFSET, offset));
+    
+    GLCall(glGetActiveUniformsiv(program, num, indices, GL_UNIFORM_OFFSET, offsets));
 
 }
+
+//void UBO::PushBufferSegment(int type, int size)
+//{
+//    
+//}
 
 void UBO::FreeUniformBlockBuffer()
 {

@@ -13,11 +13,13 @@ public:
 
 	inline unsigned char* getBuffer() { return blockBuffer; }
 	inline int getBlockSize() { return blockSize; }
-	inline unsigned int getID() { return m_UboId; }
+	inline unsigned int getID() { return m_uboId; }
+	unsigned char* blockBuffer{nullptr};
+	unsigned int m_uboId;
+	unsigned int indices[3];
+	int offsets[3];
 
 private:
-	unsigned int m_UboId;
 	int blockSize;
 	unsigned int ubo_index;
-	unsigned char* blockBuffer{nullptr};
 };
