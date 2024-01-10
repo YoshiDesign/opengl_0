@@ -31,6 +31,9 @@ void Game1::Setup()
 
     window.InitWindow(WIDTH, HEIGHT, "Game1");
 
+    glfwMakeContextCurrent(window.getGLFWwindow());
+
+    // Initialize OpenGL
     if (!glewInit() == GLEW_OK) {
         throw std::runtime_error("Glew is not ok!");
     }
@@ -124,6 +127,7 @@ int Game1::run()
 
             gui.Gui_NewFrame();
 
+            // Apply the color buffer mask
             renderer.Clear();
 
             // Calculate time between iterations
@@ -166,7 +170,7 @@ int Game1::run()
     //glDeleteProgram();
     //glDeleteVertexArrays();
     glUnmapBuffer(GL_UNIFORM_BUFFER);
-
+    glfwDestroyWindow(window.getGLFWwindow());
     glfwTerminate();
     return 0;
 }

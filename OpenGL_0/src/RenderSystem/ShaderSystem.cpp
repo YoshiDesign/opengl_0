@@ -31,11 +31,11 @@ void ShaderSystem::AddShader(const std::string& vertShader_filepath, const std::
     // TODO
 }
 
-unsigned int ShaderSystem::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
+GLuint ShaderSystem::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
 {
-    unsigned int program = glCreateProgram();
-    unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
-    unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
+    GLuint program = glCreateProgram();
+    GLuint vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
+    GLuint fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
 
     glAttachShader(program, vs);
     glAttachShader(program, fs);
@@ -50,9 +50,12 @@ unsigned int ShaderSystem::CreateShader(const std::string& vertexShader, const s
 
 }
 
-unsigned int ShaderSystem::CompileShader(unsigned int type, const std::string& source)
+/*
+    
+*/
+GLuint ShaderSystem::CompileShader(GLuint type, const std::string& source)
 {
-    unsigned int id = glCreateShader(type);
+    GLuint id = glCreateShader(type);
     const char* src = source.c_str();
     glShaderSource(id, 1, &src, nullptr);
     glCompileShader(id);
@@ -79,12 +82,13 @@ unsigned int ShaderSystem::CompileShader(unsigned int type, const std::string& s
     return id;
 }
 /*
-    parsing shaders in code
+    Parsing shaders in code from 1 file
 */
 ShaderProgramSource ShaderSystem::ParseShader(const std::string& filepath)
 {
     std::ifstream stream(filepath);
 
+    // Our shader catalog index
     enum class ShaderType
     {
         NONE = -1, VERTEX = 0, FRAGMENT = 1

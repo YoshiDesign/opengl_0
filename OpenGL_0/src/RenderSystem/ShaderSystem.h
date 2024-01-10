@@ -13,8 +13,8 @@ class ShaderSystem {
 
 private:
 
-	unsigned int CompileShader(unsigned int type, const std::string& source);
-	unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
+	GLuint CompileShader(unsigned int type, const std::string& source);
+	GLuint CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	ShaderProgramSource ParseShader(const std::string& filepath);
 
 public:
@@ -44,6 +44,6 @@ public:
 private:
 	//unsigned int m_RendererID;
 	std::unordered_map<std::string, int> m_UniformLocationCache;
-	std::unordered_map <std::string, unsigned int> shaders; // <program name, program handle>
+	std::unordered_map<std::string, unsigned int> shaders; // <program name, program handle>
 
 };
