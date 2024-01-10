@@ -78,7 +78,9 @@ unsigned int ShaderSystem::CompileShader(unsigned int type, const std::string& s
 
     return id;
 }
-
+/*
+    parsing shaders in code
+*/
 ShaderProgramSource ShaderSystem::ParseShader(const std::string& filepath)
 {
     std::ifstream stream(filepath);

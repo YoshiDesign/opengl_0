@@ -134,14 +134,12 @@ int Game1::run()
 
             // Calculating FPS
             m_tick += frameTime;
-            //m_frames++;
+
             if (m_tick >= 1.0f) 
             {
                 gui.debug_data["FPS"] = ImGui::GetIO().Framerate;
                 gui.debug_data["FrameTime"] = frameTime;
                 m_tick = 0.0f;
-                //m_frames = 0;
-                //tick++;
             }
 
             //frameTime = glm::min(frameTime, MAX_FRAME_TIME);	// Use this to lock to a specific max frame rate
